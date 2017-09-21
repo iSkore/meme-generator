@@ -1,6 +1,7 @@
 'use strict';
 
 import { resolve } from 'path';
+import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -18,7 +19,8 @@ const
     includeModules = new webpack.ProvidePlugin( {
         $: 'jquery',
         jQuery: 'jquery',
-        'window.jQuery': 'jquery'
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default']
     } );
 
 export default {
@@ -49,6 +51,13 @@ export default {
                 test: /\.(woff|woff2)$/,
                 use: {
                     loader: 'file-loader?publicPath=../&name=/fonts/[name].[ext]'
+                }
+            },
+            {
+                test: /\.js/,
+                loader: 'babel-loader',
+                options: {
+                    ignore: resolve( __dirname, 'node_modules/' )
                 }
             }
         ]
