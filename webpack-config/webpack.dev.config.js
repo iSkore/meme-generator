@@ -1,6 +1,6 @@
 'use strict';
 
-import { resolve, join } from 'path';
+import { resolve } from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
