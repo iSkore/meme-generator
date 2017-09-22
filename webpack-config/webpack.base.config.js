@@ -7,7 +7,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const
-    extractSass    = new ExtractTextPlugin( './css/main.css' ),
+    extractSass    = new ExtractTextPlugin( './css/main.scss' ),
     extractAssests = new CopyWebpackPlugin( [ {
         from: './assets/',
         to: '../dist/assets/'
@@ -65,6 +65,7 @@ export default {
     plugins: [
         extractSass,
         extractAssests,
-        extractHtml
+        extractHtml,
+        includeModules
     ]
 };
