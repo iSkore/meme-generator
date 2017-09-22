@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Meme Generator</title>
+    <title>Meme Maker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <div class="container">
@@ -20,13 +23,27 @@
                 </li>
             </ul>
         </nav>
-        <h3 class="text-muted">Project name</h3>
+        <h3 class="text-muted">Meme Maker</h3>
     </div>
 
     <div class="jumbotron">
-        <h1 class="display-3">Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="assets/memes/Baby-Sammy.png" alt="meme">
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/memes/Black-Girl-Wat.jpg" alt="meme">
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/memes/Creepy-Condescending-Wonka.jpg" alt="meme">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <a class="btn btn-lg btn-success" href="#" role="button">Generate</a>
     </div>
 </div>
 </body>

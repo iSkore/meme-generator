@@ -20,7 +20,7 @@ const
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default']
+        Popper: [ 'popper.js', 'default' ]
     } );
 
 export default {
@@ -41,11 +41,28 @@ export default {
             },
             {
                 test: /\.scss$/,
-                include: resolve( __dirname, '../app/css' ),
-                use: extractSass.extract( {
-                    fallback: 'style-loader',
-                    use: [ 'css-loader', 'sass-loader' ]
-                } )
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function() {
+                                return [
+                                    require( 'precss' ),
+                                    require( 'autoprefixer' )
+                                ];
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
             },
             {
                 test: /\.(woff|woff2)$/,
