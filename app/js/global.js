@@ -1,11 +1,17 @@
 'use strict';
 
-import $ from 'jquery';
-import Popper from 'popper.js';
+import 'bootstrap';
+import Swiper from 'swiper';
 
-window.jQuery = $;
-window.Popper = Popper;
-
-require( 'bootstrap' );
-
-console.log( 'global' );
+$( document ).ready( function() {
+    const
+        swiper = new Swiper( '.swiper-container', {
+            direction: 'horizontal',
+            pagination: '.swiper-pagination',
+            prevButton: '.swiper-button-prev',
+            nextButton: '.swiper-button-next',
+            paginationClickable: true,
+            loop: true,
+            slidesPerView: 1
+        } );
+} );
