@@ -24,8 +24,8 @@
   "homepage": "https://github.com/iSkore/meme-generator#readme",
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.5"
+    "jquery": "^3.0.0",
+    "popper.js": "^1.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

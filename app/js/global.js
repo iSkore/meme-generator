@@ -1,10 +1,10 @@
 'use strict';
 
-const
-    $         = require( 'jquery' );
+import $ from 'jquery';
+import Popper from 'popper.js';
 
 window.jQuery = $;
-window.Popper = require( 'popper.js' );
+window.Popper = Popper;
 
 require( 'bootstrap' );
 
