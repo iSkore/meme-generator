@@ -1,5 +1,4 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~swiper/dist/css/swiper';
 
 body {
     padding-top: 1.5rem;
@@ -11,10 +10,76 @@ img {
     max-height: 100%;
 }
 
-.swiper-container {
-    width: 600px;
-    height: 300px;
+.ta {
+    position: relative;
+    left: 10%;
+    max-width: 80%;
+    margin: 1rem;
 }
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+.container img {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.memefont {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    height: 30%;
+    z-index: 100;
+    text-align: center;
+
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", "sans serif";
+    font-size: 48px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 42px;
+
+    color: black;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+.topfont {
+    top: 5%;
+}
+
+.bottomfont {
+    bottom: 5%;
+    vertical-align: bottom;
+}
+
+#bottomfont span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .header,
 .footer {
