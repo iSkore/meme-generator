@@ -2,6 +2,7 @@
 
 import 'bootstrap';
 import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
 
 (function( $ ) {
     $.fn.textfill = function( options ) {
@@ -57,9 +58,13 @@ $( document ).ready( function() {
 
         html2canvas( canvas, {
             onrendered: function( c ) {
-                const
-                    img = c.toDataURL( 'image/png' );
-                window.open( img );
+                const ctx = c.getContext( '2d' );
+                ctx.lineWidth = 2;
+                console.log( ctx );
+
+                c.toBlob( function( blob ) {
+                    saveAs( blob, "pretty image.png" );
+                } );
             }
         } );
     } );
