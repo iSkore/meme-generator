@@ -33,23 +33,75 @@ import { saveAs } from 'file-saver';
     }
 })( jQuery );
 
+function drawImageScaled( img, ctx ) {
+    return new Promise(
+        res => {
+            const
+                canvas = ctx.canvas,
+                hRatio = canvas.width / img.width,
+                vRatio = canvas.height / img.height,
+                ratio  = Math.min( hRatio, vRatio ),
+                shiftX = ( canvas.width - img.width * ratio ) / 2,
+                shiftY = ( canvas.height - img.height * ratio ) / 2;
+
+            console.log( shiftX, shiftY );
+
+            ctx.clearRect( 0, 0, canvas.width, canvas.height );
+            ctx.drawImage( img, 0, 0, img.width, img.height, shiftX, shiftY, img.width * ratio, img.height * ratio );
+            res( {
+                x: shiftX,
+                y: shiftY,
+                width: img.width,
+                height: img.height
+            } );
+        }
+    )
+}
+
+function loadImage( canvas, src, fn ) {
+    const img = new Image();
+    img.src = src || '../assets/memes/Baby-Sammy.png';
+
+    img.onload = () => {
+        drawImageScaled( img, canvas )
+            .then( fn )
+            .catch( console.error );
+    };
+}
+
+function loadText( ctx, txt, position ) {
+    console.log( position );
+    ctx.strokeText( txt, position.x, position.y, position.width, position.height );
+    ctx.fillText( txt, position.x, position.y, position.width, position.height );
+}
+
 $( document ).ready( function() {
     const
-        top    = $( '#topfont' ),
-        bottom = $( '#bottomfont' );
+        canvas      = document.getElementById( 'meme' ),
+        ctx         = canvas.getContext( '2d' ),
+        topPosition = {
+            x: canvas.width * 0.2,
+            y: canvas.height * 0.1
+        };
+
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.textBaseline = 'middle';
+    ctx.lineWidth = 4;
+    ctx.font = '48px Impact';
+
+    loadImage( ctx, '../assets/memes/Baby-Sammy.png', rect => {
+        topPosition.x = rect.x;
+        topPosition.y = rect.y;
+        topPosition.width = rect.width;
+        topPosition.height = rect.height * 0.25;
+    } );
 
     $( '#topinput' ).bind( 'input propertychange', function() {
-        top.textfill( {
-            maxFontPixels: 48,
-            text: this.value.toUpperCase()
-        } );
+        loadText( ctx, this.value.toUpperCase(), topPosition );
     } );
 
     $( '#bottominput' ).bind( 'input propertychange', function() {
-        bottom.textfill( {
-            maxFontPixels: 48,
-            text: this.value.toUpperCase()
-        } );
     } );
 
     $( '#generate' ).click( () => {
@@ -59,8 +111,6 @@ $( document ).ready( function() {
         html2canvas( canvas, {
             onrendered: function( c ) {
                 const ctx = c.getContext( '2d' );
-                ctx.lineWidth = 2;
-                console.log( ctx );
 
                 c.toBlob( function( blob ) {
                     saveAs( blob, "pretty image.png" );
