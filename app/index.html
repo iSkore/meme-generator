@@ -27,23 +27,21 @@
     </div>
 
     <div class="jumbotron">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="assets/memes/Baby-Sammy.png" alt="meme">
-                </div>
-                <div class="swiper-slide">
-                    <img src="assets/memes/Black-Girl-Wat.jpg" alt="meme">
-                </div>
-                <div class="swiper-slide">
-                    <img src="assets/memes/Creepy-Condescending-Wonka.jpg" alt="meme">
-                </div>
+        <input type="text" class="form-control ta" id="topinput">
+
+        <div class="container" id="meme">
+            <img src="assets/memes/Baby-Sammy.png"/>
+            <div class="memefont topfont" id="topfont">
+                <span></span>
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="memefont bottomfont" id="bottomfont">
+                <span></span>
+            </div>
         </div>
-        <a class="btn btn-lg btn-success" href="#" role="button">Generate</a>
+
+        <input type="text" class="form-control ta" id="bottominput">
+
+        <button type="button" class="btn btn-success" id="generate">Generate</button>
     </div>
 </div>
 </body>
