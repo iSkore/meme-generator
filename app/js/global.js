@@ -9,11 +9,14 @@ import { saveAs } from 'file-saver';
         const
             span      = $( 'span:visible:first', this ),
             span2     = $( 'span:visible:last', this ),
-            maxHeight = $( this ).height(),
+            maxHeight = $( this ).outerHeight(),
             maxWidth  = $( this ).width();
 
+        console.log( $( this ) );
         span.text( options.text );
         span2.text( options.text );
+
+        console.log( maxHeight );
 
         let
             fontSize = options.maxFontPixels || 48,
@@ -28,6 +31,7 @@ import { saveAs } from 'file-saver';
             textHeight = span.height();
             textWidth = span.width();
             fontSize = fontSize - 1;
+            console.log( textHeight );
         } while( ( textHeight > maxHeight || textWidth > maxWidth ) && fontSize > 10 );
 
         return this;
