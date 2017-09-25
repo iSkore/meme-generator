@@ -8,10 +8,12 @@ import { saveAs } from 'file-saver';
     $.fn.textfill = function( options ) {
         const
             span      = $( 'span:visible:first', this ),
+            span2     = $( 'span:visible:last', this ),
             maxHeight = $( this ).height(),
             maxWidth  = $( this ).width();
 
         span.text( options.text );
+        span2.text( options.text );
 
         let
             fontSize = options.maxFontPixels || 48,
@@ -20,7 +22,13 @@ import { saveAs } from 'file-saver';
 
         do {
             span.css( {
-                'font-size': fontSize,
+                'font-size': fontSize - 4,
+                'line-height': ( fontSize * 0.9 ) + 'px',
+                'letter-spacing': 2
+            } );
+
+            span2.css( {
+                'font-size': fontSize + 1,
                 'line-height': ( fontSize * 0.9 ) + 'px'
             } );
 
@@ -54,17 +62,29 @@ $( document ).ready( function() {
 
     $( '#generate' ).click( () => {
         const
-            canvas = document.getElementById( 'meme' );
+            canvas = document.getElementById( 'meme' ),
+            render = $( '#render' );
 
         html2canvas( canvas, {
+            letterRendering: true,
+            logging: true,
             onrendered: function( c ) {
+                console.log( c );
                 const ctx = c.getContext( '2d' );
+                ctx.fillStyle = 'white';
+                ctx.strokeStyle = 'black';
                 ctx.lineWidth = 2;
+
                 console.log( ctx );
 
-                c.toBlob( function( blob ) {
-                    saveAs( blob, "pretty image.png" );
-                } );
+                render.html( '' );
+                render.append( c );
+
+                $( '.mlg' ).modal( 'show' );
+
+                // c.toBlob( function( blob ) {
+                // saveAs( blob, "pretty image.png" );
+                // } );
             }
         } );
     } );
