@@ -42,8 +42,9 @@ img {
     position: absolute;
     left: 10%;
     width: 80%;
+    height: 50px;
+    max-height: 100px;
     text-align: center;
-    //font-size: 100px;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
@@ -67,7 +68,7 @@ img {
 }
 
 .bottomfont {
-    position: absolute;
+    position: relative;
     bottom: 50px;
 }
 
