@@ -17,20 +17,13 @@ import { saveAs } from 'file-saver';
 
         let
             fontSize = options.maxFontPixels || 48,
+            lineHeight = ( fontSize * 0.9 ) + 'px',
             textHeight,
             textWidth;
 
         do {
-            span.css( {
-                'font-size': fontSize - 4,
-                'line-height': ( fontSize * 0.9 ) + 'px',
-                'letter-spacing': 2
-            } );
-
-            span2.css( {
-                'font-size': fontSize + 1,
-                'line-height': ( fontSize * 0.9 ) + 'px'
-            } );
+            span.css( { fontSize, lineHeight } );
+            span2.css( { fontSize, lineHeight } );
 
             textHeight = span.height();
             textWidth = span.width();
@@ -69,22 +62,9 @@ $( document ).ready( function() {
             letterRendering: true,
             logging: true,
             onrendered: function( c ) {
-                console.log( c );
-                const ctx = c.getContext( '2d' );
-                ctx.fillStyle = 'white';
-                ctx.strokeStyle = 'black';
-                ctx.lineWidth = 2;
-
-                console.log( ctx );
-
-                render.html( '' );
-                render.append( c );
-
-                $( '.mlg' ).modal( 'show' );
-
-                // c.toBlob( function( blob ) {
-                // saveAs( blob, "pretty image.png" );
-                // } );
+                c.toBlob( function( blob ) {
+                    saveAs( blob, "meme.png" );
+                } );
             }
         } );
     } );

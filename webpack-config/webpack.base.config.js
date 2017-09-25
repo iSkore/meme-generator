@@ -65,7 +65,7 @@ export default {
                 ]
             },
             {
-                test: /\.(woff|woff2)$/,
+                test: /\.(ttf|woff|woff2)$/,
                 use: {
                     loader: 'file-loader?publicPath=../&name=/fonts/[name].[ext]'
                 }
