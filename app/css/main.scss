@@ -46,11 +46,17 @@ img {
     //color: white;
     //-webkit-text-stroke-width: 2px;
     //-webkit-text-stroke-color: black;
+    color: black;
+    //-webkit-text-stroke: 2px black;
+}
+
+.backing {
+    z-index: 5;
     color: white;
-    -webkit-text-stroke: 2px black;
 }
 
 .topfont {
+    z-index: 10;
     top: 5%;
 }
 
@@ -65,8 +71,6 @@ img {
     left: 0;
     width: 100%;
 }
-
-
 
 
 
