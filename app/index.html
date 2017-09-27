@@ -7,42 +7,49 @@
 
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon"/>
 </head>
-<body>
-<div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills float-right">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">Meme Maker</h3>
-    </div>
 
-    <div class="jumbotron">
+<body>
+
+<nav class="maker-nav navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-white" href="#">Meme Maker</a>
+    <ul class="nav nav-pills float-right">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div id="meme-container" class="jumbotron">
+        <div class="col-sm-12">
         <input type="text" class="form-control ta" id="topinput">
+
         <div class="container" id="meme">
             <img src="assets/memes/Baby-Sammy.png"/>
-            <div class="memefont topfont" id="topfont">
-                <span class="memefont backfont"></span>
-                <span class="memefont frontfont"></span>
+            <div class="memefont-container" id="topfont-container">
+                <div class="font-wrapper">
+                    <span class="memefont backfont"></span>
+                    <span class="memefont frontfont"></span>
+                </div>
             </div>
-            <div class="memefont bottomfont" id="bottomfont">
-                <span class="memefont backfont low"></span>
-                <span class="memefont frontfont low"></span>
+            <div class="memefont-container" id="bottomfont-container">
+                <div class="font-wrapper">
+                    <span class="memefont backfont low"></span>
+                    <span class="memefont frontfont low"></span>
+                </div>
             </div>
         </div>
 
         <input type="text" class="form-control ta" id="bottominput">
 
         <button type="button" class="btn btn-success" id="generate">Generate</button>
+        </div>
     </div>
 </div>
 
@@ -53,4 +60,4 @@
     </div>
 </div>
 </body>
-</html>3
+</html>
