@@ -1,13 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 
+@font-face {
+    font-family: 'FrontFont';
+    src: url('../fonts/Impact-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'BackFont';
+    src: url('../fonts/Impact.ttf') format('truetype');
+}
+
 body {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    background-color: #475360;
 }
 
 img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.maker-nav {
+    margin-bottom: 3rem;
+
 }
 
 .ta {
@@ -28,23 +42,37 @@ img {
     left: 0;
 }
 
-@font-face {
-    font-family: 'FrontFont';
-    src: url('../fonts/Impact-Regular.ttf') format('truetype');
+#meme-container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-@font-face {
-    font-family: 'BackFont';
-    src: url('../fonts/Impact.ttf') format('truetype');
+#meme {
+    max-width: 100% !important;
+    padding: 0;
+}
+
+.memefont-container {
+    position: absolute;
+    width: 100%;
+    max-height: 100px;
+    flex-wrap: wrap;
+
+    .font-wrapper {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        word-wrap: break-word;
+    }
 }
 
 .memefont {
     position: absolute;
-    left: 10%;
-    width: 80%;
-    height: 50px;
-    max-height: 100px;
-    text-align: center;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
@@ -63,19 +91,12 @@ img {
     font-family: BackFont, Impact;
 }
 
-.topfont {
-    top: 5%;
+#topfont-container {
+    top: 0;
 }
 
-.bottomfont {
-    position: relative;
-    bottom: 50px;
-}
-
-.low {
-    position: absolute;
-    min-height: 100%;
-    vertical-align: bottom;
+#bottomfont-container {
+    bottom: 0;
 }
 
 

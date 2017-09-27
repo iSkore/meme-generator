@@ -5,55 +5,63 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 
 (function( $ ) {
-    $.fn.textfill = function( options ) {
+    $.fn.textfill = function( event, text ) {
         const
-            span      = $( 'span:visible:first', this ),
-            span2     = $( 'span:visible:last', this ),
-            maxHeight = $( this ).outerHeight(),
-            maxWidth  = $( this ).width();
+            maxFontPixels = 48,
+            span          = $( 'span:visible:first', this ),
+            span2         = $( 'span:visible:last', this ),
+            maxHeight     = $( this ).outerHeight(),
+            maxWidth      = $( this ).width();
 
-        console.log( $( this ) );
-        span.text( options.text );
-        span2.text( options.text );
+        span.text( text );
+        span2.text( text );
 
-        console.log( maxHeight );
+        if ( maxHeight === 100 && event.which !== 8 ) {
+            event.preventDefault();
+        }
 
         let
-            fontSize = options.maxFontPixels || 48,
+            fontSize   = maxFontPixels,
             lineHeight = ( fontSize * 0.9 ) + 'px',
-            textHeight,
-            textWidth;
+            textHeight = span.height(),
+            textWidth  = span.width();
 
-        do {
-            span.css( { fontSize, lineHeight } );
-            span2.css( { fontSize, lineHeight } );
+        span.css( { fontSize, lineHeight } );
+        span2.css( { fontSize, lineHeight } );
 
-            textHeight = span.height();
-            textWidth = span.width();
-            fontSize = fontSize - 1;
-            console.log( textHeight );
-        } while( ( textHeight > maxHeight || textWidth > maxWidth ) && fontSize > 10 );
+        // do {
+        //     span.css( { fontSize, lineHeight } );
+        //     span2.css( { fontSize, lineHeight } );
+        //
+        //     textHeight = span.height();
+        //     textWidth = span.width();
+        //     fontSize = fontSize - 1;
+        // } while( ( textHeight > maxHeight || textWidth > maxWidth ) && fontSize > 30 );
+
+        if ( textWidth >= maxWidth ) {
+            $( this ).css( { height : '100px' } );
+        }
 
         return this;
-    }
+    };
 })( jQuery );
 
 $( document ).ready( function() {
     const
-        top    = $( '#topfont' ),
-        bottom = $( '#bottomfont' );
+        top    = $( '#topfont-container' ).children( '.font-wrapper' ),
+        bottom = $( '#bottomfont-container' ).children( '.font-wrapper' );
 
-    $( '#topinput' ).bind( 'input propertychange', function() {
-        top.textfill( {
-            maxFontPixels: 48,
-            text: this.value.toUpperCase()
-        } );
+    $( '#topinput' ).bind( 'input keydown', function( e ) {
+        if ( e.which && e.which === 8 )
+            return true;
+
+        top.textfill( e, this.value.toUpperCase() );
     } );
 
     $( '#bottominput' ).bind( 'input propertychange', function() {
         bottom.textfill( {
-            maxFontPixels: 48,
-            text: this.value.toUpperCase()
+            maxFontPixels : 48,
+            text : this.value.toUpperCase()
         } );
     } );
 
@@ -63,11 +71,11 @@ $( document ).ready( function() {
             render = $( '#render' );
 
         html2canvas( canvas, {
-            letterRendering: true,
-            logging: true,
-            onrendered: function( c ) {
+            letterRendering : true,
+            logging : true,
+            onrendered : function( c ) {
                 c.toBlob( function( blob ) {
-                    saveAs( blob, "meme.png" );
+                    saveAs( blob, 'meme.png' );
                 } );
             }
         } );
