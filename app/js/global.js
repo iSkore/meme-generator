@@ -23,7 +23,6 @@ import { saveAs } from 'file-saver';
         let
             fontSize   = maxFontPixels,
             lineHeight = ( fontSize * 0.9 ) + 'px',
-            textHeight = span.height(),
             textWidth  = span.width();
 
         span.css( { fontSize, lineHeight } );
@@ -58,11 +57,11 @@ $( document ).ready( function() {
         top.textfill( e, this.value.toUpperCase() );
     } );
 
-    $( '#bottominput' ).bind( 'input propertychange', function() {
-        bottom.textfill( {
-            maxFontPixels : 48,
-            text : this.value.toUpperCase()
-        } );
+    $( '#bottominput' ).bind( 'input keydown', function( e ) {
+        if ( e.which && e.which === 8 )
+            return true;
+
+        bottom.textfill( e, this.value.toUpperCase() );
     } );
 
     $( '#generate' ).click( () => {
