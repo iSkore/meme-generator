@@ -9,7 +9,7 @@ $( document ).ready( function() {
     let meme;
 
     meme = new MemeCanvas();
-    meme.drawImage( 'assets/memes/Black-Girl-Wat.jpg' );
+    meme.drawImage( 'assets/memes/Baby-Sammy.png' );
 
     $( '#topinput' ).bind( 'input', function() {
         meme.updateText( this.value, 'top' )
