@@ -13,17 +13,27 @@
     <nav class="maker-nav navbar navbar-dark bg-dark">
         <a class="navbar-brand text-white" href="#">Meme Maker</a>
         <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item mr-3 text-light">
+                <div class="btn-group">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Background Fill
+                    </a>
+                    <div class="dropdown-menu">
+                        <a id="colorPick1" class="dropdown-item" href="#">White</a>
+                        <a id="colorPick2" class="dropdown-item" href="#">Black</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <div class="dropdown-divider"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a id="upload" class="nav-link active" href="#">Upload</a>
             </li>
         </ul>
     </nav>
+
+    <input id="fileInput" type="file" name="name" />
 
     <div class="container">
         <div id="meme-container" class="jumbotron">
@@ -31,8 +41,7 @@
             <input type="text" class="form-control ta" id="topinput">
 
             <div class="container" id="meme">
-                <!--<img src="assets/memes/Baby-Sammy.png"/>-->
-                <canvas id="meme-canvas" width='500' height='300'></canvas>
+                <canvas id="meme-canvas" width="400" height="400"></canvas>
                 <div class="memefont-container" id="topfont-container">
                     <div class="font-wrapper">
                         <span class="memefont backfont"></span>

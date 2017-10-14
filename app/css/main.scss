@@ -79,17 +79,9 @@ img {
     line-height: 42px;
 }
 
-//.frontfont {
-//    z-index: 10;
-//    color: white;
-//    font-family: FrontFont, Impact;
-//}
-//
-//.backfont {
-//    z-index: 8;
-//    color: black;
-//    font-family: BackFont, Impact;
-//}
+#fileInput {
+    display: none;
+}
 
 #topfont-container {
     top: 0;
@@ -98,19 +90,6 @@ img {
 #bottomfont-container {
     bottom: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .header,
 .footer {

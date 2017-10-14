@@ -9,16 +9,21 @@ class MemeCanvas {
             frontFont = new FontFace( 'FrontFont', 'url( ../fonts/Impact-Regular.ttf )' ),
             backFont  = new FontFace( 'BackFont', 'url( ../fonts/Impact.ttf )' );
 
-        this.ctx   = canvas.getContext( '2d' );
-        this.ctx.font        = '48px FrontFont';
+        this.canvas = canvas;
+        this.ctx = canvas.getContext( '2d' );
+
+        this.clearCanvas();
+
+        this.ctx.font = '48px FrontFont';
         this.ctx.textAlign = 'center';
-        this.ctx.fillStyle   = 'white';
+        this.ctx.fillStyle = 'white';
         this.ctx.strokeStyle = 'black';
-        this.ctx.lineWidth   = 2;
-        this.image = {};
-        this.text  = {
-            top : '',
-            bottom : ''
+        this.ctx.lineWidth = 2;
+        this.image = null;
+        this.color = '#FFFFFF';
+        this.text = {
+            top: '',
+            bottom: ''
         };
 
         Promise.all( [ frontFont.load(), backFont.load() ] )
@@ -28,26 +33,56 @@ class MemeCanvas {
             } );
     }
 
+    clearCanvas() {
+        this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
+        this.ctx.fillStyle = this.color;
+        this.ctx.fillRect( 0, 0, this.canvas.width, this.canvas.height );
+    }
+
+    redrawCanvas() {
+        this.drawImage()
+            .then( () => this.drawText() )
+            .catch( console.error );
+    }
+
     drawImage( src ) {
+        this.clearCanvas();
+
         return new Promise( res => {
             const
                 image = new Image(),
-                ctx   = this.ctx;
+                self  = this;
 
-            image.src    = src;
             image.onload = function() {
-                res( ctx.drawImage( this, 0, 0, 500, 500 * this.height / this.width ) );
+                const
+                    hRatio        = self.ctx.canvas.width / this.width,
+                    vRatio        = self.ctx.canvas.height / this.height,
+                    ratio         = Math.min( hRatio, vRatio ),
+                    centerShift_x = ( self.ctx.canvas.width - this.width * ratio ) / 2,
+                    centerShift_y = ( self.ctx.canvas.height - this.height * ratio ) / 2;
+
+                res(
+                    self.ctx.drawImage(
+                        this, 0, 0,
+                        this.width, this.height,
+                        centerShift_x, centerShift_y,
+                        this.width * ratio, this.height * ratio
+                    )
+                );
             };
 
-            if ( !this.image.src )
-                this.image.src = src;
+            image.src = src || this.image.src;
+            this.image = image;
         } );
     }
 
     drawText() {
         const
-            fillTop    = this.textFill( this.ctx, this.text.top, 250, 50 ),
-            fillBottom = this.textFill( this.ctx, this.text.bottom, 250, 290 );
+            hRatio     = this.ctx.canvas.width / 2,
+            vtRatio    = this.ctx.canvas.height / 6,
+            vbRatio    = this.ctx.canvas.height - vtRatio,
+            fillTop    = this.textFill( this.ctx, this.text.top, hRatio, vtRatio ),
+            fillBottom = this.textFill( this.ctx, this.text.bottom, hRatio, vbRatio );
 
         return Promise.all( [ fillTop, fillBottom ] );
     }
@@ -66,32 +101,33 @@ class MemeCanvas {
     }
 
     textFill( ctx, text = '', x, y ) {
-        return new Promise( ( res, rej ) => {
-            let uppercase = text.toUpperCase(),
-                words     = uppercase.split( ' ' ),
-                line      = '',
+        return new Promise( res => {
+            let uppercase  = text.toUpperCase(),
+                words      = uppercase.split( ' ' ),
+                line       = '',
                 lineHeight = 48 * 0.9,
-                maxWidth  = $( '#meme-canvas' ).outerWidth();
+                maxWidth   = $( '#meme-canvas' ).outerWidth();
 
-            for ( let n = 0; n < words.length; n++ ) {
+            for( let n = 0; n < words.length; n++ ) {
                 let testLine  = line + words[ n ] + ' ',
                     testWidth = ctx.measureText( testLine ).width;
 
-                console.log( testLine );
-                if ( testWidth > maxWidth && n > 0 ) {
+                if( testWidth > maxWidth && n > 0 ) {
+                    ctx.fillStyle = 'white';
                     ctx.fillText( line, x, y );
                     ctx.strokeText( line, x, y );
                     line = words[ n ] + ' ';
-                }
-                else if ( testWidth > maxWidth && n === 0 ) {
+                    y += lineHeight;
+                } else if( testWidth > maxWidth && n === 0 ) {
                     let prevText = text.substr( 0, text.length - 1 );
-                    rej( prevText );
-                }
-                else {
+                    prevText += '\n';
+                    y += lineHeight;
+                } else {
                     line = testLine;
                 }
             }
 
+            ctx.fillStyle = 'white';
             ctx.fillText( line, x, y );
             ctx.strokeText( line, x, y );
 
