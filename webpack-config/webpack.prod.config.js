@@ -16,7 +16,7 @@ export default Merge( CommonConfig, {
     },
     plugins: [
         new webpack.LoaderOptionsPlugin( {
-            minimize: true,
+            minimize: false,
             debug: false
         } ),
         new webpack.optimize.ModuleConcatenationPlugin(),
