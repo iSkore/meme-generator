@@ -12,7 +12,6 @@
   "futurehostile": true,
   "noarg": true,
   "unused": true,
-  "esnext": true,
   "eqeqeq": true,
   "nocomma": true,
   "devel": true,
