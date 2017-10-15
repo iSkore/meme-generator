@@ -21,6 +21,7 @@ class MemeCanvas {
         this.ctx.lineWidth = 2;
         this.image = null;
         this.color = '#FFFFFF';
+        this.fit = true;
         this.text = {
             top: '',
             bottom: ''
@@ -54,21 +55,25 @@ class MemeCanvas {
                 self  = this;
 
             image.onload = function() {
-                const
-                    hRatio        = self.ctx.canvas.width / this.width,
-                    vRatio        = self.ctx.canvas.height / this.height,
-                    ratio         = Math.min( hRatio, vRatio ),
-                    centerShift_x = ( self.ctx.canvas.width - this.width * ratio ) / 2,
-                    centerShift_y = ( self.ctx.canvas.height - this.height * ratio ) / 2;
+                if( !self.fit ) {
+                    res( self.ctx.drawImage( this, 0, 0, this.width, this.height ) );
+                } else {
+                    const
+                        hRatio        = self.ctx.canvas.width / this.width,
+                        vRatio        = self.ctx.canvas.height / this.height,
+                        ratio         = Math.min( hRatio, vRatio ),
+                        centerShift_x = ( self.ctx.canvas.width - this.width * ratio ) / 2,
+                        centerShift_y = ( self.ctx.canvas.height - this.height * ratio ) / 2;
 
-                res(
-                    self.ctx.drawImage(
-                        this, 0, 0,
-                        this.width, this.height,
-                        centerShift_x, centerShift_y,
-                        this.width * ratio, this.height * ratio
-                    )
-                );
+                    res(
+                        self.ctx.drawImage(
+                            this, 0, 0,
+                            this.width, this.height,
+                            centerShift_x, centerShift_y,
+                            this.width * ratio, this.height * ratio
+                        )
+                    );
+                }
             };
 
             image.src = src || this.image.src;

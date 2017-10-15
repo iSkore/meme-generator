@@ -9,23 +9,23 @@
 </head>
 
 <body>
-
     <nav class="maker-nav navbar navbar-dark bg-dark">
-        <a class="navbar-brand text-white" href="#">Meme Maker</a>
+        <a class="navbar-brand text-white" href="#">Meme Maker <span id="version"></span></a>
         <ul class="nav nav-pills float-right">
-            <li class="nav-item mr-3 text-light">
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Background Fill
-                    </a>
+            <li class="nav-item">
+                <a id="fit" class="nav-link btn-success mr-2" href="#">Fit?</a>
+            </li>
+            <li class="nav-item mr-2 text-light">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary">Background</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only"></span>
+                    </button>
                     <div class="dropdown-menu">
                         <a id="colorPick1" class="dropdown-item" href="#">White</a>
                         <a id="colorPick2" class="dropdown-item" href="#">Black</a>
                     </div>
                 </div>
-            </li>
-            <li class="nav-item">
-                <div class="dropdown-divider"></div>
             </li>
             <li class="nav-item">
                 <a id="upload" class="nav-link active" href="#">Upload</a>
@@ -38,27 +38,29 @@
     <div class="container">
         <div id="meme-container" class="jumbotron">
             <div class="col-sm-12">
-            <input type="text" class="form-control ta" id="topinput">
+                <input type="text" class="form-control ta" id="topinput" />
 
-            <div class="container" id="meme">
-                <canvas id="meme-canvas" width="400" height="400"></canvas>
-                <div class="memefont-container" id="topfont-container">
-                    <div class="font-wrapper">
-                        <span class="memefont backfont"></span>
-                        <span class="memefont frontfont"></span>
+                <div class="container">
+                    <div id="meme" class="container">
+                        <canvas id="meme-canvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="memefont-container" id="topfont-container">
+                        <div class="font-wrapper">
+                            <span class="memefont backfont"></span>
+                            <span class="memefont frontfont"></span>
+                        </div>
+                    </div>
+                    <div class="memefont-container" id="bottomfont-container">
+                        <div class="font-wrapper">
+                            <span class="memefont backfont low"></span>
+                            <span class="memefont frontfont low"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="memefont-container" id="bottomfont-container">
-                    <div class="font-wrapper">
-                        <span class="memefont backfont low"></span>
-                        <span class="memefont frontfont low"></span>
-                    </div>
-                </div>
-            </div>
 
-            <input type="text" class="form-control ta" id="bottominput">
+                <input type="text" class="form-control ta" id="bottominput" />
 
-            <button type="button" class="btn btn-success" id="generate">Generate</button>
+                <button type="button" class="btn btn-success" id="generate">Generate</button>
             </div>
         </div>
     </div>
