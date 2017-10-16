@@ -30,7 +30,7 @@ $( document ).ready( function() {
             } );
     } );
 
-    $( '#generate' ).click( () => {
+    function generate() {
         const
             canvas = $( '#meme-canvas' ),
             origin = {
@@ -58,7 +58,10 @@ $( document ).ready( function() {
                 } );
             }
         } );
-    } );
+    }
+
+    $( '#nav-generate' ).click( generate );
+    $( '#generate' ).click( generate );
 
     function colorPick() {
         const color = $( this ).attr( 'id' );
