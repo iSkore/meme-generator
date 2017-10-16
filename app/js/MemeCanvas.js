@@ -3,11 +3,12 @@
  */
 
 class MemeCanvas {
-    constructor() {
+    constructor( src ) {
         const
             canvas    = document.getElementById( 'meme-canvas' ),
             frontFont = new FontFace( 'FrontFont', 'url( ../fonts/Impact-Regular.ttf )' ),
-            backFont  = new FontFace( 'BackFont', 'url( ../fonts/Impact.ttf )' );
+            backFont  = new FontFace( 'BackFont', 'url( ../fonts/Impact.ttf )' ),
+            self = this;
 
         this.canvas = canvas;
         this.ctx = canvas.getContext( '2d' );
@@ -19,7 +20,8 @@ class MemeCanvas {
         this.ctx.fillStyle = 'white';
         this.ctx.strokeStyle = 'black';
         this.ctx.lineWidth = 2;
-        this.image = null;
+        this.image = new Image();
+        this.image.src = src;
         this.color = '#FFFFFF';
         this.fit = true;
         this.text = {
@@ -27,11 +29,27 @@ class MemeCanvas {
             bottom: ''
         };
 
+        this.image.onload = function() {
+            self.loadImage( this );
+        };
+
         Promise.all( [ frontFont.load(), backFont.load() ] )
             .then( fonts => {
                 document.fonts.add( fonts[ 0 ] );
                 document.fonts.add( fonts[ 1 ] );
             } );
+    }
+
+    loadImage( image ) {
+        this.width = image.width;
+        this.height = image.height;
+        this.hRatio = this.ctx.canvas.width / this.width;
+        this.vRatio = this.ctx.canvas.height / this.height;
+        this.ratio = Math.min( this.hRatio, this.vRatio );
+        this.centerShift_x = ( this.ctx.canvas.width - this.width * this.ratio ) / 2;
+        this.centerShift_y = ( this.ctx.canvas.height - this.height * this.ratio ) / 2;
+
+        this.drawImage();
     }
 
     clearCanvas() {
@@ -46,38 +64,22 @@ class MemeCanvas {
             .catch( console.error );
     }
 
-    drawImage( src ) {
+    drawImage() {
         this.clearCanvas();
 
         return new Promise( res => {
-            const
-                image = new Image(),
-                self  = this;
-
-            image.onload = function() {
-                if( !self.fit ) {
-                    res( self.ctx.drawImage( this, 0, 0, this.width, this.height ) );
-                } else {
-                    const
-                        hRatio        = self.ctx.canvas.width / this.width,
-                        vRatio        = self.ctx.canvas.height / this.height,
-                        ratio         = Math.min( hRatio, vRatio ),
-                        centerShift_x = ( self.ctx.canvas.width - this.width * ratio ) / 2,
-                        centerShift_y = ( self.ctx.canvas.height - this.height * ratio ) / 2;
-
-                    res(
-                        self.ctx.drawImage(
-                            this, 0, 0,
-                            this.width, this.height,
-                            centerShift_x, centerShift_y,
-                            this.width * ratio, this.height * ratio
-                        )
-                    );
-                }
-            };
-
-            image.src = src || this.image.src;
-            this.image = image;
+            if( !this.fit ) {
+                res( this.ctx.drawImage( this.image, 0, 0, this.width, this.height ) );
+            } else {
+                res(
+                    this.ctx.drawImage(
+                        this.image, 0, 0,
+                        this.width, this.height,
+                        this.centerShift_x, this.centerShift_y,
+                        this.width * this.ratio, this.height * this.ratio
+                    )
+                );
+            }
         } );
     }
 

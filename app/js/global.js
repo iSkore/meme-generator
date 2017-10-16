@@ -13,8 +13,7 @@ $( document ).ready( function() {
 
     let meme;
 
-    meme = new MemeCanvas();
-    meme.drawImage( 'assets/memes/Baby-Sammy.png' );
+    meme = new MemeCanvas('assets/memes/Baby-Sammy.png');
 
     topInput.bind( 'input', function() {
         meme.updateText( this.value, 'top' )
@@ -104,8 +103,7 @@ $( document ).ready( function() {
                 const reader = new FileReader();
 
                 reader.onload = function( e ) {
-                    meme = new MemeCanvas();
-                    meme.drawImage( e.target.result );
+                    meme = new MemeCanvas( e.target.result );
                     topInput.trigger( 'input' );
                     bottomInput.trigger( 'input' );
                 };
