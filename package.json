@@ -1,6 +1,6 @@
 {
   "name": "meme-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Meme gererator for fun",
   "main": "index.js",
   "scripts": {
