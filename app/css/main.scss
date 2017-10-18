@@ -24,11 +24,19 @@ img {
 
 }
 
+.text-input {
+    text-align: center;
+    margin: 1rem auto;
+
+    p {
+        margin: 0;
+    }
+}
+
 .ta {
     position: relative;
-    left: 10%;
+    margin: 1rem auto;
     max-width: 80%;
-    margin: 1rem;
 }
 
 .container {
@@ -40,6 +48,28 @@ img {
     position: relative;
     top: 0;
     left: 0;
+}
+
+.header,
+.footer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.header {
+    padding-bottom: 1rem;
+    border-bottom: .05rem solid #e5e5e5;
+}
+
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 3rem;
+}
+
+.jumbotron {
+    text-align: center;
+    border-bottom: .05rem solid #e5e5e5;
 }
 
 #meme-container {
@@ -94,37 +124,22 @@ img {
     bottom: 0;
 }
 
-.header,
-.footer {
-    padding-right: 1rem;
-    padding-left: 1rem;
+#generate {
+    padding: .75rem 1.5rem;
+    font-size: 1.5rem;
+    margin-top: 1rem;
 }
 
-.header {
-    padding-bottom: 1rem;
-    border-bottom: .05rem solid #e5e5e5;
-}
-
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 3rem;
+@media (min-width: 576px) {
+    .jumbotron {
+        padding: 2.5rem;
+    }
 }
 
 @media (min-width: 48em) {
     .container {
         max-width: 46rem;
     }
-}
-
-.jumbotron {
-    text-align: center;
-    border-bottom: .05rem solid #e5e5e5;
-}
-
-.jumbotron .btn {
-    padding: .75rem 1.5rem;
-    font-size: 1.5rem;
 }
 
 @media screen and (min-width: 48em) {
