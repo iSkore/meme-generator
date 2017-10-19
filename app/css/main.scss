@@ -35,7 +35,7 @@ img {
 
 .ta {
     position: relative;
-    margin: 1rem auto;
+    margin: 0.5rem auto 1rem auto;
     max-width: 80%;
 }
 
@@ -84,6 +84,10 @@ img {
     width: 100%;
     overflow: auto;
     padding: 0;
+}
+
+#canvas-container {
+    margin: 2rem 0;
 }
 
 .memefont-container {

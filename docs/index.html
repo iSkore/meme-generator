@@ -41,10 +41,13 @@
     <div class="container">
         <div id="meme-container" class="jumbotron">
             <div class="col-sm-12">
-                <input type="text" class="form-control ta" id="topinput" />
+                <div class="text-input">
+                    <p>Top Text:</p>
+                    <input type="text" class="form-control ta" id="topinput" />
+                </div>
 
-                <div class="container">
-                    <div id="meme" class="container">
+                <div id="canvas-container" class="container">
+                    <div id="meme">
                         <canvas id="meme-canvas" width="400" height="400"></canvas>
                     </div>
                     <div class="memefont-container" id="topfont-container">
@@ -61,7 +64,10 @@
                     </div>
                 </div>
 
-                <input type="text" class="form-control ta" id="bottominput" />
+                <div class="text-input">
+                    <p>Bottom Text:</p>
+                    <input type="text" class="form-control ta" id="bottominput" />
+                </div>
 
                 <button type="button" class="btn btn-success" id="generate">Generate</button>
             </div>
